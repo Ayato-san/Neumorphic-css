@@ -1,0 +1,28 @@
+.badge {
+    padding-block: 0.25em;
+    padding-inline: 0.5em;
+    margin-inline: 0.25em;
+    font-size: 0.8em;
+    border-radius: 0.3em;
+    display: inline-block;
+    user-select: none;
+
+    &-dark {
+        background-color: var(--primary-dark);
+    }
+    &-light {
+        background-color: var(--primary-light);
+    }
+    &-accent {
+        background-color: var(--accent);
+    }
+    &-succes {
+        background-color: var(--succes);
+    }
+    &-warn {
+        background-color: var(--warn);
+    }
+    &-error {
+        background-color: var(--error);
+    }
+}

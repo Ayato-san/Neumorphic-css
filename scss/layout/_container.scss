@@ -1,0 +1,88 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:math';
+@use '../abstracts/media-query' as *;
+
+$margins: (
+    sm: 2em,
+    md: 5em,
+    lg: 7em,
+    xl: 10em,
+    2xl: 12em
+);
+
+$cols: 12;
+
+.container,
+.container-fluid {
+    overflow-y: auto;
+
+    & .row,
+    &.row {
+        display: flex;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        &.row-reverse {
+            flex-direction: row-reverse;
+        }
+        &.column {
+            flex-direction: column;
+        }
+        &.column-reverse {
+            flex-direction: column-reverse;
+        }
+        &.scrollable {
+            // max-width: 100%;
+            // margin: auto;
+            overflow-y: auto;
+        }
+    }
+
+    @each $name, $size in $breakpoints {
+        @include mq($name) {
+            $sizeName: $name;
+            @if $name != '' {
+                $sizeName: '#{$name}-';
+            }
+            @for $i from 1 through $cols {
+                & .col-#{$sizeName}#{$i} {
+                    flex-basis: math.div(100%, $cols) * $i;
+                    max-width: math.div(100%, $cols) * $i;
+                    flex-grow: 1;
+                }
+                & .offset-#{$sizeName}#{$i} {
+                    flex-shrink: 0;
+                    margin-left: math.div(100%, $cols) * $i;
+                }
+            }
+        }
+    }
+}
+.container {
+    @each $name, $size in $breakpoints {
+        @include mq($name) {
+            @if $name != '' {
+                margin-inline: map.get($margins, $name);
+            }
+        }
+    }
+
+    &-fluid {
+        margin-inline: 0rem;
+    }
+    &,
+    &-fluid {
+        padding-inline: 0.5em;
+        padding-block: 0.25em;
+        &:first-child,
+        &:last-child {
+            margin-block: 0.5em;
+        }
+        & + & {
+            margin-top: 1em;
+        }
+    }
+}

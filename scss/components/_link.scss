@@ -1,0 +1,10 @@
+@use '../abstracts/functions' as *;
+
+a {
+    text-decoration: none;
+    color: var(--text-dark);
+    @include transition(color);
+    &:hover {
+        color: var(--accent);
+    }
+}

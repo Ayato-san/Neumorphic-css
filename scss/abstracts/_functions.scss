@@ -1,0 +1,21 @@
+@use 'sass:color' as *;
+// @use '../abstracts/color' as *;
+@use 'sass:map';
+@use 'sass:math';
+
+@mixin transition($key) {
+    transition-property: unquote($key);
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+@function toHSL($color) {
+    @return 'hsl(' + math.round(hue($color)) + ', ' +
+        math.round(saturation($color)) + ', ' + math.round(lightness($color)) +
+        ')';
+}
+
+@function toRGB($color) {
+    @return 'rgb(' + red($color) + ', ' + green($color) + ', ' + blue($color) +
+        ')';
+}

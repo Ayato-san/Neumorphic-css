@@ -1,0 +1,61 @@
+.table {
+    border-collapse: collapse;
+    border: 0.1em solid var(--primary-dark);
+    white-space: nowrap;
+
+    td,
+    th {
+        padding: 0.5em 1em;
+    }
+
+    thead {
+        background-color: var(--text-dark);
+        text-align: left;
+    }
+
+    &.neu,
+    &.neu-inset {
+        padding: 0.4em;
+        border: none;
+        overflow: hidden;
+        & thead {
+            border-radius: 0.8em 0.8em 0 0;
+        }
+    }
+    &.neu-inset thead {
+        box-shadow: var(--neu-primary-inset);
+    }
+    &.neu-inset.table-odd tr:nth-child(2n):not(thead) {
+        box-shadow: inset 0.15em 0em 0.3em var(--primary-dark),
+            inset -0.15em 0em 0.3em var(--primary-light),
+            inset 0em 0.15em 0em var(--text-dark),
+            inset 0em -0.15em 0em var(--text-dark);
+    }
+
+    &.table-bordered {
+        td:not(:last-child),
+        th:not(:last-child) {
+            border-right: 0.1em solid var(--primary-dark);
+        }
+        tr:not(:last-child),
+        th {
+            border-bottom: 0.1em solid var(--primary-dark);
+        }
+    }
+
+    &.table-horizontal {
+        tr:not(:last-child),
+        th {
+            border-bottom: 0.1em solid var(--primary-dark);
+        }
+    }
+
+    &.table-odd tr:nth-child(2n):not(thead) {
+        background-color: var(--primary-light);
+    }
+}
+
+div:has(.table) {
+    max-width: 100%;
+    overflow-y: auto;
+}

@@ -1,0 +1,58 @@
+@use 'sass:color' as *;
+@use 'functions' as *;
+
+$colors: (
+    primary: hsl(217, 9%, 18%),
+    accent: hsl(184, 70%, 49%),
+    succes: hsl(143, 70%, 49%),
+    warn: hsl(44, 70%, 49%),
+    error: hsl(0, 70%, 49%),
+    text: hsl(0, 0%, 100%)
+);
+
+:root {
+    @each $color, $value in $colors {
+        --#{$color}: #{$value};
+        --#{$color}-light: #{toHSL(mix($value, hsl(0, 0%, 65%)))};
+        --#{$color}-dark: #{toHSL(mix($value, hsl(0, 0%, 5%)))};
+    }
+    --neu: 0.15em 0.15em 0.3em var(--primary-dark),
+        -0.15em -0.15em 0.3em var(--primary-light);
+    @each $color, $value in $colors {
+        --neu-#{$color}-inset: inset 0.15em 0.15em 0.3em var(--#{$color}-dark),
+            inset -0.15em -0.15em 0.3em var(--#{$color}-light);
+    }
+}
+
+@each $color, $value in $colors {
+    .text-#{$color} {
+        color: var(--#{$color});
+    }
+    .text-#{$color}-light {
+        color: var(--#{$color}-light);
+    }
+    .text-#{$color}-dark {
+        color: var(--#{$color}-dark);
+    }
+    .bg-#{$color} {
+        background-color: var(--#{$color});
+    }
+    .bg-#{$color}-light {
+        background-color: var(--#{$color}-light);
+    }
+    .bg-#{$color}-dark {
+        background-color: var(--#{$color}-dark);
+    }
+    .border-#{$color} {
+        // border: 0.1em solid var(--#{$color});
+        box-shadow: inset 0px 0px 0px 0.1em var(--#{$color});
+    }
+    .border-#{$color}-light {
+        // border: 0.1em solid var(--#{$color}-light);
+        box-shadow: inset 0px 0px 0px 0.1em var(--#{$color}-light);
+    }
+    .border-#{$color}-dark {
+        // border: 0.1em solid var(--#{$color}-dark);
+        box-shadow: inset 0px 0px 0px 0.1em var(--#{$color}-dark);
+    }
+}

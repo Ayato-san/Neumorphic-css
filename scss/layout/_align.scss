@@ -1,0 +1,35 @@
+.row {
+    &.align {
+        &-top {
+            align-items: flex-start;
+        }
+        &-right {
+            justify-content: safe flex-end;
+        }
+        &-bottom {
+            align-items: flex-end;
+        }
+        &-left {
+            justify-content: flex-start;
+        }
+        &-center {
+            justify-content: safe center;
+        }
+        &-vertical-center {
+            align-items: center;
+        }
+    }
+    .align {
+        &-text {
+            &-left {
+                text-align: start;
+            }
+            &-center {
+                text-align: center;
+            }
+            &-right {
+                text-align: end;
+            }
+        }
+    }
+}

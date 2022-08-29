@@ -1,0 +1,101 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/color' as *;
+@use 'sass:map';
+
+.btn {
+    border: none;
+    border-radius: 0.5em;
+    color: var(--text);
+    padding: 0.5em;
+    margin: 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-color: var(--primary);
+    box-shadow: var(--neu);
+    @include transition('box-shadow, color');
+    font-size: 0.9em;
+    cursor: pointer;
+
+    &:hover,
+    &-active {
+        box-shadow: var(--neu-primary-inset);
+    }
+
+    &-disable {
+        box-shadow: var(--neu-primary-inset);
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+            color: var(--text);
+        }
+    }
+
+    &-round {
+        border-radius: 3em;
+    }
+    &-circle {
+        aspect-ratio: 1 / 1;
+        display: inline-flex;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-Highlight {
+        background-color: var(--accent);
+        &:hover,
+        &.btn-active {
+            box-shadow: var(--neu-accent-inset);
+        }
+    }
+    &-succes {
+        background-color: var(--succes);
+        &:hover,
+        &.btn-active {
+            box-shadow: var(--neu-succes-inset);
+        }
+    }
+    &-warn {
+        background-color: var(--warn);
+        &:hover,
+        &.btn-active {
+            box-shadow: var(--neu-warn-inset);
+        }
+    }
+    &-error {
+        background-color: var(--error);
+        &:hover,
+        &.btn-active {
+            box-shadow: var(--neu-error-inset);
+        }
+    }
+}
+a {
+    &.btn-active {
+        color: var(--accent);
+    }
+    &.btn-Highlight,
+    &.btn-succes,
+    &.btn-warn,
+    &.btn-error {
+        color: var(--primary-dark);
+
+        &:hover {
+            color: var(--primary-dark);
+        }
+    }
+}
+button {
+    &.btn-Highlight,
+    &.btn-succes,
+    &.btn-warn,
+    &.btn-error {
+        color: var(--primary-dark);
+
+        &:hover {
+            color: var(--primary-dark);
+        }
+    }
+}

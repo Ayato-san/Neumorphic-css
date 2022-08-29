@@ -1,0 +1,19 @@
+.neumorphism-kit,
+body {
+    color: var(--text);
+    background-color: var(--primary);
+
+    .neu,
+    .neu-inset {
+        padding-inline: 0.5em;
+        padding-block: 0.25em;
+        background-color: inherit;
+        border-radius: 0.8em;
+    }
+    .neu {
+        box-shadow: var(--neu);
+    }
+    .neu-inset {
+        box-shadow: var(--neu-primary-inset);
+    }
+}

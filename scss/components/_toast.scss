@@ -1,0 +1,54 @@
+.toast {
+    position: fixed;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    background-color: var(--primary-light);
+    box-shadow: 0.25em 0.25em var(--primary-dark);
+    .title {
+        font-size: 1.5em;
+        margin: 0.25em;
+    }
+    .content {
+        margin: 0.25em;
+    }
+    &.toast {
+        &-top {
+            &-left {
+                top: 0;
+                left: 0;
+            }
+            &-right {
+                top: 0;
+                right: 0;
+            }
+        }
+        &-bottom {
+            &-left {
+                bottom: 0;
+                left: 0;
+            }
+            &-right {
+                bottom: 0;
+                right: 0;
+            }
+        }
+        &-light {
+            background-color: var(--primary-light);
+        }
+        &-dark {
+            background-color: var(--primary-dark);
+        }
+        &-accent {
+            background-color: var(--accent);
+        }
+        &-succes {
+            background-color: var(--succes);
+        }
+        &-warn {
+            background-color: var(--warn);
+        }
+        &-error {
+            background-color: var(--error);
+        }
+    }
+}

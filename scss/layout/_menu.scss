@@ -1,0 +1,187 @@
+@use '../abstracts/functions' as *;
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use '../abstracts/media-query' as *;
+
+.menu {
+    &-vertical,
+    &-horizontal {
+        .menu-heading {
+            font-size: 1.3em;
+        }
+
+        ul.menu-list {
+            padding-inline-start: 0px;
+        }
+
+        hr {
+            border-color: var(--text-dark);
+        }
+        a {
+            color: var(--text);
+            &:hover {
+                color: var(--accent);
+            }
+        }
+    }
+
+    &-vertical {
+        width: max-content;
+
+        .menu-heading {
+            margin-bottom: 0.3em;
+            margin-top: 0em;
+        }
+
+        ul.menu-list {
+            padding-block: 0.3em;
+            white-space: nowrap;
+            list-style: none;
+        }
+    }
+    &-horizontal {
+        .menu-list *:not(hr) {
+            display: inline-block;
+            margin-inline: 0.3em;
+        }
+        ul.menu-list hr {
+            display: inline;
+            width: 100%;
+        }
+        ul.menu-stack {
+            .menu-children {
+                display: none;
+                width: max-content;
+            }
+            // TODO make CSS only
+            &.active {
+                margin-top: 0;
+                padding: 2em 1em;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                display: flex;
+                flex-direction: column;
+                background: var(--primary);
+                z-index: 100;
+                .menu-children {
+                    display: flex;
+                    flex-direction: column;
+                }
+                input[type='checkbox'].menu-icon {
+                    display: inline-block;
+                }
+            }
+            input[type='checkbox'].menu-icon {
+                appearance: none;
+                position: relative;
+                width: 1em;
+                height: 1em;
+                margin-left: 0.5em;
+                cursor: pointer;
+                &::after,
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 1em;
+                    left: 0;
+                    background-color: var(--text);
+                    height: math.div(1em, 4);
+                }
+                &::before {
+                    top: 0;
+                    box-shadow: 0em math.div(1em, 2.5) 0em var(--text);
+                    @include transition(transform);
+                }
+                &::after {
+                    bottom: 0;
+                    @include transition(transform);
+                }
+                &:checked {
+                    &::after {
+                        transform: rotate(-45deg) translateY(-0.27em)
+                            translateX(0.27em);
+                    }
+                    &::before {
+                        transform: rotate(45deg) translateY(0.27em)
+                            translateX(0.27em);
+                        box-shadow: none;
+                    }
+                }
+            }
+            @each $name, $size in $breakpoints {
+                @include mq($name) {
+                    &-#{$name} {
+                        padding: 0;
+                        position: static;
+                        display: inline;
+                        background: none;
+                        z-index: auto;
+                        .menu-children {
+                            display: inline;
+                        }
+                        input[type='checkbox'].menu-icon {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        li.menu-dropdown {
+            margin-right: 0.8em;
+            position: relative;
+            &:hover,
+            &:focus,
+            &:focus-within {
+                & .menu-icon:after {
+                    transform: rotate(90deg);
+                }
+
+                & .menu-children {
+                    display: initial;
+                }
+            }
+            & .menu-icon {
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    font-size: 0.8em;
+                    top: 0.15em;
+                    margin-left: 0.5em;
+                    border-block: 0.5625em solid transparent;
+                    border-left: 1em solid var(--text);
+                    @include transition(transform);
+                }
+            }
+            & .menu-children {
+                display: none;
+                position: absolute;
+                top: 0.8em;
+                left: 0;
+                background-color: inherit;
+            }
+        }
+    }
+
+    &-disabled {
+        opacity: 0.5;
+        & a,
+        & {
+            cursor: not-allowed;
+        }
+    }
+    &-selected {
+        font-weight: bolder;
+
+        border-bottom: 0.12rem solid var(--text);
+        @include transition(all);
+        &:hover {
+            border-color: var(--accent);
+        }
+    }
+}
